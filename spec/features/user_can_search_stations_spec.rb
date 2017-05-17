@@ -5,8 +5,8 @@ RSpec.feature 'As a user' do
 
   api_key = ENV["api_key"]
     
-  nrel_stations = NrelStation.find_by(api_key)
-  nrel_station = nrel_stations.first
+  stations = Station.find_by(api_key)
+  station = stations.first
 
   visit root_path
 
@@ -16,8 +16,11 @@ RSpec.feature 'As a user' do
 
   expect(current_path).to be eq("/search")
   expect(nrel_stations.count).to eq(10)
-  expect(nrel_station["name"]).to eq("premise")
-  expect(nrel_station["name"]).to eq("premise")
+  expect(station["name"]).to eq("Denver West Bldg 17")
+  expect(station["address"]).to eq("1626 Cole Boulevard")
+  expect(station["fuel_type"]).to eq("ELEC")
+  expect(station["distance"]).to eq("0.10992")
+  expect(station["access_time"]).to eq("MO: 12:00am-12:00am; TU: 12:00am-12:00am; WE: 12:00am-12:00am; TH: 12:00am-12:00am; FR: 12:00am-12:00am; SA: 12:00am-12:00am; SU: 12:00am-12:00am")
   end
 end
 
