@@ -2,20 +2,24 @@ require 'rails_helper'
 
 RSpec.feature 'As a user' do
   it "they can fill in the serach form with zipcode" do
-  user = User.create(name: "Jack")
-  stations = Station.create(name: "PennStation", address: "Denver", fuel_type: "E85", distance: 6, access_time: "24 hours daily")
+
+  api_key = ENV["api_key"]
+    
+  nrel_stations = NrelStation.find_by(api_key)
+  nrel_station = nrel_stations.first
 
   visit root_path
 
   fill_in "station[zipcode]", with: "80203"
 
   click_on "Locate"
-  expect(current_path).to be eq("/search")
-  expect(stations.count).to eq(10)
 
+  expect(current_path).to be eq("/search")
+  expect(nrel_stations.count).to eq(10)
+  expect(nrel_station["name"]).to eq("premise")
+  expect(nrel_station["name"]).to eq("premise")
   end
 end
-
 
 # As a user
 # When I visit "/"
