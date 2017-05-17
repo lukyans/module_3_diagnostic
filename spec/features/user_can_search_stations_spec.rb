@@ -16,11 +16,18 @@ RSpec.feature 'As a user' do
 
       # expect(current_path).to be eq("/search")
       expect(stations.count).to eq(10)
-      expect(station["name"]).to eq("Denver West Bldg 17")
-      expect(station["address"]).to eq("1626 Cole Boulevard")
-      expect(station["fuel_type"]).to eq("ELEC")
-      expect(station["distance"]).to eq("0.10992")
-      expect(station["access_time"]).to eq("MO: 12:00am-12:00am; TU: 12:00am-12:00am; WE: 12:00am-12:00am; TH: 12:00am-12:00am; FR: 12:00am-12:00am; SA: 12:00am-12:00am; SU: 12:00am-12:00am")
+      expect(sations).to be_a(Hash)
+      expect(station).to have_key("name")
+      expect(station).to have_key("address")
+      expect(station).to have_key("fuel_type")
+      expect(station).to have_key("distance")
+      expect(station).to have_key("access_time")
+
+      expect(station["name"]).to be_a(String)
+      expect(station["address"]).to be_a(String)
+      expect(station["fuel_type"]).to be_a(String)
+      expect(station["distance"]).to be_a(Decimal)
+      expect(station["access_time"]).to be_a(String)
     end
   end
 end
